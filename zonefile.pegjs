@@ -20,7 +20,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Start rule: A zonefile is Directives followed by Records, and possibly blank lines or comments.
 Zonefile
-  = (Directive / __)* (Record / __)*
+  = directives:(Directive / __)* records:(Record / __)* {
+  	var origins = directives.filter(d => !!d.origin)
+    var ttls = directives.filter(d => !!d.ttl)
+    return {
+      origin: origins[0] && origins[0].origin,
+      ttl: ttls[0] && ttls[0].ttl,
+      records: records
+    }
+  }
 
 // ---- Directives -------------------------------------------------------------
 
@@ -46,22 +54,22 @@ Record
   / GenericRecord
 
 ARecord
-  = name:Name? ttl:Ttl? Class? type:'A' _ data:Ipv4 __ {
+  = name:Name? ttl:Ttl? Class? type:'A' _ ipAddress:Ipv4 __ {
   	return {
       name: name,
       ttl: ttl,
       type: type,
-      data: data
+      data: ipAddress
     }
   }
 
 CnameRecord
-  = name:Name? ttl:Ttl? Class? type:'CNAME' _ data:Domain __ {
+  = name:Name? ttl:Ttl? Class? type:'CNAME' _ domain:Domain __ {
   	return {
       name: name,
       ttl: ttl,
       type: type,
-      data: data
+      data: domain
     }
   }
 
@@ -76,23 +84,23 @@ NsRecord
   }
 
 MxRecord
-  = name:Name? ttl:Ttl? Class? type:'MX' _ preference:Integer _ data:Domain __  {
+  = name:Name? ttl:Ttl? Class? type:'MX' _ preference:Integer _ domain:Domain __  {
   	return {
       name: name,
       ttl: ttl,
       type: type,
-      data: data,
+      data: domain,
       priority: preference
     }
   }
 
 SoaRecord
-  = name:Name? ttl:Ttl? Class? type:'SOA' _ nameServer:Domain _ email:Domain _ '(' __ serial:SerialNumber __ refresh:Refresh __ retry:Retry __ expiry:Expiry __ min:Minimum __ ')' __? {
+  = name:Name? ttl:Ttl? Class? type:'SOA' _ nameServer:Domain _ email:Domain _ '(' __ serial:Integer __ refresh:Time __ retry:Time __ expiry:Time __ minimum:Time __ ')' __? {
   	return {
       name: name,
       ttl: ttl,
       type: type,
-      data: [nameServer, email, serial, refresh, retry, expiry, min].join(' ')
+      data: [nameServer, email, serial, refresh, retry, expiry, minimum].join(' ')
     }
   }
 
@@ -138,27 +146,6 @@ Type
 Data
   = $((!Comment !NewLine .)*)
 
-// --- SOA specific data params ------------------------------------------------
-
-// Unsigned 32 bit value in range 1 to 4294967295 with a maximum increment of 2147483647. In BIND implementations this is defined to be a 10 digit field. This value MUST increment when any resource record in the zone file is updated.
-SerialNumber
-  = Integer
-
-// Signed 32 bit time value in seconds. Indicates the time when the slave will try to refresh the zone from the master (by reading the master DNS SOA RR)
-Refresh
-  = Time
-
-// Signed 32 bit value in seconds. Defines the time between retries if the slave (secondary) fails to contact the master when refresh (above) has expired or a NOTIFY message is received.
-Retry
-  = Time
-
-// Signed 32 bit value in seconds. Indicates when the zone data is no longer authoritative.
-Expiry
-  = Time
-// Signed 32 bit value in seconds. RFC 2308 (implemented by BIND 9) redefined this value to be the negative caching time - the time a NAME ERROR = NXDOMAIN result may be cached by any resolver. The maximum value allowed by RFC 2308 for this parameter is 3 hours (10800 seconds)
-Minimum
-  = Time
-
 // ---- Common types -----------------------------------------------------------
 
 // http://www.zytrax.com/books/dns/apa/time.html
@@ -171,20 +158,17 @@ Ipv4
 
 // A decimal octet, 0 to 255
 Octet
-  = ([0-9] [0-9]? [0-9]?) { return parseInt(text(), 10); }
+  = $([0-9] [0-9]? [0-9]?)
 
 // Domain names may be formed from the set of alphanumeric ASCII characters (a-z, A-Z, 0-9), but characters are case-insensitive. In addition the hyphen is permitted if it is surrounded by characters, digits or hyphens, although it is not to start or end a label. Labels are always separated by the full stop (period) character in the textual name representation.
 // https://en.wikipedia.org/wiki/Domain_name#Technical_requirements_and_process
 Domain
-  = Label ('.' Label)* '.'? { return text()}
+  = Label ('.' Label)* '.'? { return text() }
 
 Label
   = [a-z0-9-_*]i+
 // TODO: pervent leading hyphens in domain labels
 // = [a-z0-9]i+ / [a-z0-9]i ([a-z0-9]i / '-')* [a-z0-9]i
-
-Weight
-  = weight:(Integer) _
 
 Integer
   = $('0' / [1-9][0-9]*)
