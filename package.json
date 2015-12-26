@@ -1,0 +1,27 @@
+{
+  "name": "zonefile-pegjs",
+  "version": "0.1.0",
+  "description": "A PEG.js grammar for parsing zonefile DNS configuration",
+  "main": "zonefile.pegjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tableflip/zonefile-pegjs.git"
+  },
+  "keywords": [
+    "dns",
+    "zonefile",
+    "resource",
+    "records",
+    "peg",
+    "grammar"
+  ],
+  "author": "olizilla <oli@tableflip.io> (https://tableflip.io)",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/tableflip/zonefile-pegjs/issues"
+  },
+  "homepage": "https://github.com/tableflip/zonefile-pegjs#readme"
+}
