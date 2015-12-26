@@ -21,12 +21,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Start rule: A zonefile is Directives followed by Records, and possibly blank lines or comments.
 Zonefile
   = directives:(Directive / __)* records:(Record / __)* {
-  	var origins = directives.filter(d => !!d.origin)
-    var ttls = directives.filter(d => !!d.ttl)
     return {
-      origin: origins[0] && origins[0].origin,
-      ttl: ttls[0] && ttls[0].ttl,
+      origin: findNoneOneOrError(directives, 'origin'),
+      ttl: findNoneOneOrError(directives, 'ttl'),
       records: records
+    }
+    function findNoneOneOrError (arr, prop) {
+      var results = arr.filter(item => !!item[prop])
+      if (results.length === 0) return null
+      if (results.length === 1) return results[0][prop]
+      return error('Zonefile has ' + results.length + ' $' + prop.toUpperCase() + ' directives. A valid zonefile has 1 or none.')
     }
   }
 
