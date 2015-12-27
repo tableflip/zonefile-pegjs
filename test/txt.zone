@@ -1,0 +1,12 @@
+easy         IN      TXT    "Located in a black hole"
+
+; multiple quotes strings on a single line
+; generates a single text string of
+; Located in a black hole somewhere
+medium       IN      TXT    "Located in a black hole" " somewhere"
+
+; multiple quoted strings on multiple lines
+hard         IN      TXT    ("Located in a black hole"
+                           " somewhere over the rainbow")
+; generates a single text string of
+; Located in a black hole somewhere over the rainbow

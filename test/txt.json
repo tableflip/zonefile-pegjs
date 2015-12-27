@@ -1,0 +1,24 @@
+{
+  "origin": null,
+  "ttl": null,
+  "records": [
+    {
+      "name": "easy",
+      "ttl": null,
+      "type": "TXT",
+      "data": "Located in a black hole"
+    },
+    {
+      "name": "medium",
+      "ttl": null,
+      "type": "TXT",
+      "data": "Located in a black hole somewhere"
+    },
+    {
+      "name": "hard",
+      "ttl": null,
+      "type": "TXT",
+      "data": "Located in a black hole somewhere over the rainbow"
+    }
+  ]
+}

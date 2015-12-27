@@ -55,6 +55,7 @@ Record
   / NsRecord
   / SoaRecord
   / SrvRecord
+  / TxtRecord
   / GenericRecord
 
 ARecord
@@ -121,6 +122,16 @@ SrvRecord
     }
   }
 
+TxtRecord
+  = name:Name? ttl:Ttl? Class? type:'TXT' _ strings:( Strings+ / MultiLineStrings ) __ {
+  	return {
+      name: name,
+      ttl: ttl,
+      type: type,
+      data: strings.join('')
+    }
+  }
+
 GenericRecord
   = name:Name? ttl:Ttl? Class? type:$[A-Z]+ _ data:Data __ {
   	return {
@@ -149,6 +160,19 @@ Type
 
 Data
   = $((!Comment !NewLine .)*)
+
+// ---- TXT specific types -----------------------------------------------------
+String
+  = '"' txt:$[^"]* '"' { return txt }
+
+Strings
+  = str:String _? { return str }
+
+MultiLineString
+  = str:String __? { return str }
+
+MultiLineStrings
+  = '(' str:MultiLineString+ ')' { return str }
 
 // ---- Common types -----------------------------------------------------------
 

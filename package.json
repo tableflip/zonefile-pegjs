@@ -4,7 +4,7 @@
   "description": "A PEG.js grammar for parsing zonefile DNS configuration",
   "main": "zonefile.pegjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape test/*.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,11 @@
   "bugs": {
     "url": "https://github.com/tableflip/zonefile-pegjs/issues"
   },
-  "homepage": "https://github.com/tableflip/zonefile-pegjs#readme"
+  "homepage": "https://github.com/tableflip/zonefile-pegjs#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "pegjs-require": "0.0.1",
+    "tape": "^4.4.0"
+  }
 }
