@@ -1,0 +1,24 @@
+{
+  "origin": "example.com.",
+  "ttl": "2d",
+  "records": [
+    {
+      "name": "easy",
+      "ttl": "10d",
+      "type": "AAAA",
+      "data": "2001:db8::3"
+    },
+    {
+      "name": "medium",
+      "ttl": null,
+      "type": "TXT",
+      "data": "Located in a black hole somewhere"
+    },
+    {
+      "name": "hard",
+      "ttl": null,
+      "type": "TXT",
+      "data": "Located in a black hole somewhere over the rainbow"
+    }
+  ]
+}

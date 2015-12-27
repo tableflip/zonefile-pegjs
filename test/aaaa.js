@@ -1,0 +1,15 @@
+var fs = require('fs')
+var test = require('tape')
+var pegjs = require('pegjs-require')
+
+test('Parse AAAA records', function (t) {
+  var zone = fs.readFileSync(__dirname  + '/aaaa.zone', 'utf8')
+  var parser = require('../zonefile.pegjs')
+  var actual = parser.parse(zone)
+  var expected = require('./aaaa.json')
+  t.equals(actual.records[0].data, expected.records[0].data, 'Easy: AAAA records with all fields')
+  // t.equals(actual.records[1].data, expected.records[1].data, 'Medium: Parser handles single line, multiple string data')
+  // t.equals(actual.records[2].data, expected.records[2].data, 'Hard: Parser handles multiple line string data')
+  // t.deepEquals(actual, expected, 'Most excellent: Parser generates expected output')
+  t.end()
+})

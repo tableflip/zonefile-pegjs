@@ -50,6 +50,7 @@ TtlDirective
 
 Record
   = ARecord
+  / AaaaRecord
   / CnameRecord
   / MxRecord
   / NsRecord
@@ -59,12 +60,22 @@ Record
   / GenericRecord
 
 ARecord
-  = name:Name? ttl:Ttl? Class? type:'A' _ ipAddress:Ipv4 __ {
+  = name:Name? ttl:Ttl? Class? type:'A' _ address:Ipv4 __ {
   	return {
       name: name,
       ttl: ttl,
       type: type,
-      data: ipAddress
+      data: address
+    }
+  }
+
+AaaaRecord
+  = name:Name? ttl:Ttl? Class? type:'AAAA' _ address:Ipv6 __ {
+  	return {
+      name: name,
+      ttl: ttl,
+      type: type,
+      data: address
     }
   }
 
@@ -94,8 +105,7 @@ MxRecord
       name: name,
       ttl: ttl,
       type: type,
-      data: domain,
-      priority: preference
+      data: { preference: preference, domain: domain }
     }
   }
 
@@ -105,7 +115,7 @@ SoaRecord
       name: name,
       ttl: ttl,
       type: type,
-      data: [nameServer, email, serial, refresh, retry, expiry, minimum].join(' ')
+      data: { nameServer: nameServer, emai:email, serial:serial, refresh:refresh, retry:retry, expiry:expiry, minimum:minimum }
     }
   }
 
@@ -115,10 +125,7 @@ SrvRecord
       name: name,
       ttl: ttl,
       type: type,
-      data: target,
-      priority: priority,
-      weight: weight,
-      port: port
+      data: { priority: priority, weight: weight, port: port, target: target }
     }
   }
 
@@ -187,6 +194,17 @@ Ipv4
 // A decimal octet, 0 to 255
 Octet
   = $([0-9] [0-9]? [0-9]?)
+
+// eight groups of four hexadecimal digits, with leading 0 and all 0 groups optionally ommitted
+// e.g :: to 2001:0db8:85a3:0000:0000:8a2e:0370:7334
+Ipv6
+  = $(HexGroup ':' HexGroup ':' (HexGroup ':')? (HexGroup ':')? (HexGroup ':')? (HexGroup ':')? (HexGroup ':')? HexGroup)
+
+HexGroup
+  = Hex? Hex? Hex? Hex?
+
+Hex
+  = [0-9a-f]i
 
 // Domain names may be formed from the set of alphanumeric ASCII characters (a-z, A-Z, 0-9), but characters are case-insensitive. In addition the hyphen is permitted if it is surrounded by characters, digits or hyphens, although it is not to start or end a label. Labels are always separated by the full stop (period) character in the textual name representation.
 // https://en.wikipedia.org/wiki/Domain_name#Technical_requirements_and_process
