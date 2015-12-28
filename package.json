@@ -1,6 +1,6 @@
 {
   "name": "zonefile-pegjs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A PEG.js grammar for parsing zonefile DNS configuration",
   "main": "zonefile.pegjs",
   "scripts": {
@@ -24,8 +24,7 @@
     "url": "https://github.com/tableflip/zonefile-pegjs/issues"
   },
   "homepage": "https://github.com/tableflip/zonefile-pegjs#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "pegjs-require": "0.0.1",
     "tape": "^4.4.0"
