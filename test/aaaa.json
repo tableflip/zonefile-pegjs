@@ -6,19 +6,19 @@
       "name": "easy",
       "ttl": "10d",
       "type": "AAAA",
-      "data": "2001:db8::3"
+      "data": "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
     },
     {
       "name": "medium",
       "ttl": null,
-      "type": "TXT",
-      "data": "Located in a black hole somewhere"
+      "type": "AAAA",
+      "data": "2001:db8::3"
     },
     {
-      "name": "hard",
+      "name": " ",
       "ttl": null,
-      "type": "TXT",
-      "data": "Located in a black hole somewhere over the rainbow"
+      "type": "AAAA",
+      "data": "::"
     }
   ]
 }

@@ -1,15 +1,7 @@
-; zone fragment for example.com
-$TTL 2d ; zone default = 2 days or 172800 seconds
-$ORIGIN example.com.
+; Test zonefile for AAAA records
 
-easy  10d  IN      AAAA      2001:db8::3
-www        IN      AAAA      2001:db8::3
-; functionally the same as the record above
-www.example.com.   AAAA      2001:db8::3
-fred  3600 IN      AAAA      2001:db8::4  ; ttl =3600 overrides $TTL default
-ftp        IN      AAAA      2001:db8::5 ; round robin with next
-           IN      AAAA      2001:db8::6
-mail       IN      AAAA      2001:db8::7  ; mail = round robin
-mail       IN      AAAA      2001:db8::32
-mail       IN      AAAA      2001:db8::33
-squat      IN      AAAA      2001:db8:0:0:1::13  ; address in another subnet
+$TTL 2d
+$ORIGIN example.com.
+easy     10d  IN      AAAA      2001:0db8:85a3:0000:0000:8a2e:0370:7334 ; ttl =3600 overrides $TTL default
+medium        IN      AAAA      2001:db8::3
+                      AAAA      ::
