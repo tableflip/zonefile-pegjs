@@ -167,8 +167,11 @@ Class
 Type
   = 'X25' /  'WKS' / 'URI' / 'UNSPEC' / 'UINFO' / 'UID' / 'TXT' / 'TSIG' / 'TLSA' / 'TKEY' / 'TALINK' / 'TA' / 'SSHFP' / 'SRV' / 'SPF' / 'SOA' / 'SMIMEA' / 'SINK' / 'SIG' / 'RT' / 'RRSIG' / 'RP' / 'RKEY' / 'PX' / 'PTR' / 'OPT' / 'OPENPGPKEY' / 'NXT' / 'NULL' / 'NSEC3PARAM' / 'NSEC3' / 'NSEC' / 'NSAP-PTR' / 'NSAP' / 'NS' / 'NINFO' / 'NIMLOC' / 'NID' / 'NAPTR' / 'MX' / 'MR' / 'MINFO' / 'MG' / 'MF' / 'MD' / 'MB' / 'MAILB' / 'MAILA' / 'LP' / 'LOC' / 'L64' / 'L32' / 'KX' / 'KEY' / 'IXFR' / 'ISDN' / 'IPSECKEY' / 'HIP' / 'HINFO' / 'GPOS' / 'GID' / 'EUI64' / 'EUI48' / 'EID' / 'DS' / 'DNSKEY' / 'DNAME' / 'DLV' / 'DHCID' / 'CSYNC' / 'CNAME' / 'CERT' / 'CDS' / 'CDNSKEY' / 'CAA' / 'AXFR' / 'ATMA' / 'APL' / 'AFSDB' / 'AAAA' / 'A6' / 'A'
 
+// Generic data matcher. Used where we don't have a type specific Record rule.
 Data
   = $((!EOL .)*)
+
+// ---- Common types -----------------------------------------------------------
 
 // Domain names may be formed from the set of alphanumeric ASCII characters (a-z, A-Z, 0-9), but characters are case-insensitive. In addition the hyphen is permitted if it is surrounded by characters, digits or hyphens, although it is not to start or end a label. Labels are always separated by the full stop (period) character in the textual name representation.
 // https://en.wikipedia.org/wiki/Domain_name#Technical_requirements_and_process
@@ -179,8 +182,6 @@ Label
   = [a-z0-9-_\*]i+
 // TODO: pervent leading hyphens in domain labels
 // = [a-z0-9]i+ / [a-z0-9]i ([a-z0-9]i / '-')* [a-z0-9]i
-
-// ---- Common types -----------------------------------------------------------
 
 // http://www.zytrax.com/books/dns/apa/time.html
 Time
@@ -208,14 +209,14 @@ Hex
 Integer
   = $('0' / [1-9][0-9]*)
 
+Comment "Comment"
+  = ';' message:$((!Newline .)*) Newline? { return message }
+
 BlankLine
-  = _* (Newline / Comment)
+  = EOL
 
 EOL
   = _* (Newline / Comment)
-
-Comment "Comment"
-  = ';' message:$((!Newline .)*) Newline? { return message }
 
 Newline "Newline"
   = '\n' / '\r\n' / '\r' / '\u2028' / '\u2029'
