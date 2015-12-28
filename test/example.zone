@@ -1,0 +1,14 @@
+; zone file for example.org
+$TTL 2d    ; 172800 secs default TTL for zone
+$ORIGIN example.org.
+@             IN      SOA   ns1.example.org. hostmaster.example.org. (
+                        2003080800 ; se = serial number
+                        12h        ; ref = refresh
+                        15m        ; ret = update retry
+                        3w         ; ex = expiry
+                        3h         ; min = minimum
+                        )
+              IN      NS      ns1.example.org.
+              IN      MX  10  mail.example.org.
+joe           IN      A       192.168.254.3
+www           IN      CNAME   joe

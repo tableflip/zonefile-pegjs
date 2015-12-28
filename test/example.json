@@ -1,0 +1,47 @@
+{
+  "origin": "example.org.",
+  "ttl": "2d",
+  "records": [
+    {
+      "name": "@",
+      "ttl": null,
+      "type": "SOA",
+      "data": {
+        "nameServer": "ns1.example.org.",
+        "email": "hostmaster.example.org.",
+        "serial": "2003080800",
+        "refresh": "12h",
+        "retry": "15m",
+        "expiry": "3w",
+        "minimum": "3h"
+      }
+    },
+    {
+      "name": " ",
+      "ttl": null,
+      "type": "NS",
+      "data": "ns1.example.org."
+    },
+    {
+      "name": " ",
+      "ttl": null,
+      "type": "MX",
+      "data": {
+        "preference": "10",
+        "domain": "mail.example.org."
+      }
+    },
+    {
+      "name": "joe",
+      "ttl": null,
+      "type": "A",
+      "data": "192.168.254.3"
+    },
+    {
+      "name": "www",
+      "ttl": null,
+      "type": "CNAME",
+      "data": "joe"
+    }
+  ]
+}
