@@ -1,0 +1,15 @@
+easy   IN      SOA   ns1.example.org. hostmaster.example.org. (
+                        2003080800
+                        12h
+                        15m
+                        3w
+                        3h
+                        )
+
+medium  IN  SOA   ns1 hostmaster ( 2003080800 ; se = serial number
+                        12h        ; ref = refresh
+                        15m        ; ret = update retry
+                        3w         ; ex = expiry
+                        3h)         ; min = minimum
+
+            SOA   ns1 hostmaster ( 2003080800 12h 15m 3w 3h )

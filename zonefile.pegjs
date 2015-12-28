@@ -185,7 +185,7 @@ Label
 
 // http://www.zytrax.com/books/dns/apa/time.html
 Time
-  = $(Integer [smhdw]i?)
+  = $((Integer [smhdw]i)+ / Integer)
 
 // A dotted quad, e.g. 192.168.0.1
 Ipv4

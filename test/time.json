@@ -1,0 +1,26 @@
+{
+  "origin": null,
+  "ttl": null,
+  "records": [
+    {
+      "name": "@",
+      "ttl": null,
+      "type": "SOA",
+      "data": {
+        "nameServer": "ns.foo.com.",
+        "email": "root.foo.com.",
+        "serial": "2003080800",
+        "refresh": "10800s",
+        "retry": "15M",
+        "expiry": "3W12h",
+        "minimum": "2h20M"
+      }
+    },
+    {
+      "name": "www",
+      "ttl": "12H15m",
+      "type": "A",
+      "data": "10.0.5.17"
+    }
+  ]
+}

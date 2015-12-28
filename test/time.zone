@@ -1,0 +1,11 @@
+; See http://www.zytrax.com/books/dns/apa/time.html
+; foo.com zone file fragment
+; common origin (@) format
+@           IN      SOA   ns.foo.com. root.foo.com. (
+               2003080800 ; serial number
+               10800s     ; refresh =  3 hours
+               15M        ; update retry = 15 minutes
+               3W12h      ; expiry = 3 weeks + 12 hours
+               2h20M      ; minimum = 2 hours + 20 minutes
+               )
+www 12H15m  IN     A      10.0.5.17 ; A record TTL value

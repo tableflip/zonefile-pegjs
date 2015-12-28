@@ -1,0 +1,48 @@
+{
+  "origin": null,
+  "ttl": null,
+  "records": [
+    {
+      "name": "easy",
+      "ttl": null,
+      "type": "SOA",
+      "data": {
+        "nameServer": "ns1.example.org.",
+        "email": "hostmaster.example.org.",
+        "serial": "2003080800",
+        "refresh": "12h",
+        "retry": "15m",
+        "expiry": "3w",
+        "minimum": "3h"
+      }
+    },
+    {
+      "name": "medium",
+      "ttl": null,
+      "type": "SOA",
+      "data": {
+        "nameServer": "ns1",
+        "email": "hostmaster",
+        "serial": "2003080800",
+        "refresh": "12h",
+        "retry": "15m",
+        "expiry": "3w",
+        "minimum": "3h"
+      }
+    },
+    {
+      "name": " ",
+      "ttl": null,
+      "type": "SOA",
+      "data": {
+        "nameServer": "ns1",
+        "email": "hostmaster",
+        "serial": "2003080800",
+        "refresh": "12h",
+        "retry": "15m",
+        "expiry": "3w",
+        "minimum": "3h"
+      }
+    }
+  ]
+}
