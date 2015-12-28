@@ -1,6 +1,6 @@
 # zonefile-pegjs
 
-A PEG.js grammar for parsing zonefile DNS configuration to JSON. Handles **multi-line SOA and TXT records**, as well well as **SRV, MX, CNAME, AAAA, A** and friends.
+A PEG.js grammar for parsing zonefile DNS configuration to JSON. Handles **multi-line SOA and TXT records**, as well as **SRV, MX, CNAME, NS, AAAA, A** and friends.
 
 See **[zonefile.pegjs](https://github.com/tableflip/zonefile-pegjs/blob/master/zonefile.pegjs)** for the magic. You can try it out by pasting it into the PEG.js web dingus: http://pegjs.org/online
 
