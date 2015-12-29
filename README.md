@@ -43,7 +43,7 @@ test('Parse zonefile for example.org.', function (t) {
 })
 ```
 
-So given zonefile like: [**example.zone**](https://github.com/tableflip/zonefile-pegjs/blob/master/test/example.zone)
+So given a zonefile like: [**example.zone**](https://github.com/tableflip/zonefile-pegjs/blob/master/test/example.zone)
 
 ```zonefile
 ; zone file for example.org
@@ -114,3 +114,6 @@ The parser will produce: [**example.json**](https://github.com/tableflip/zonefil
 }
 ```
 
+---
+
+A [(╯°□°）╯︵TABLEFLIP](https://tableflip.io) side project.
